@@ -1,0 +1,4 @@
+[alias]
+prisma = "run -p prisma_cli --"
+server = "run --bin server"
+loadcsv = "run --bin loadcsv"

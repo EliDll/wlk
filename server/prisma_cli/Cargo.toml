@@ -1,0 +1,9 @@
+[package]
+name = "prisma_cli"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+prisma-client-rust-cli = { git = "https://github.com/Brendonovich/prisma-client-rust", rev = "310620e42805a537fcdac76082ae152266ce89ba",default-features = false,features = ["rspc", "migrations", "postgresql"]}

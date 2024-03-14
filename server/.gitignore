@@ -1,0 +1,9 @@
+target
+.idea
+DS_STORE
+.DS_Store
+.env
+workspace*
+.csv
+/data/*
+/src/db.rs

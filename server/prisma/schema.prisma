@@ -1,0 +1,82 @@
+generator client {
+  provider    = "cargo prisma"
+  output      = "../src/db.rs"
+  module_path = "db"
+  previewFeatures = ["fullTextSearch"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Graph data
+model Category {
+  name String @id @unique
+  nodes Node[]
+}
+
+model Discipline {
+  name String @id @unique
+  articles Article[]
+}
+
+model Node {
+  name        String    @id @unique
+  url         String
+  category    Category  @relation(fields: [category_id], references: [name])
+  category_id String
+  src_edges    Edge[]    @relation("srcEdges")
+  dest_edges   Edge[]    @relation("destEdges")
+  author      String    @default("Unknown")
+  teaser_text String    @default("Unknown")
+  views       Int       @default(0)
+  wlk_hovers Int       @default(0)
+  wlk_clicks Int       @default(0)
+  read_time   String    @default("Unknown")
+}
+
+model Edge {
+  source      Node      @relation("srcEdges", fields: [source_id], references: [name])
+  source_id   String 
+  target      Node      @relation("destEdges", fields: [target_id], references: [name])
+  target_id   String
+  articles    Article[]
+
+  @@id(fields: [source_id, target_id])
+}
+
+model Article {
+  name        String  @id
+  edge        Edge    @relation(fields: [edge_source_id,edge_target_id], references: [source_id, target_id])
+  edge_source_id     String
+  edge_target_id     String
+  discipline  Discipline  @relation(fields: [discipline_id], references: [name])
+  discipline_id String
+  author      String  @default("Unknown")
+  teaser_text String  @default("Unknown")
+  date        String  @default("1/1/2022") //TODO make this a real date if the data allow it
+  url         String  @default("https://www.bidt.digital/glossar/")
+  views       Int     @default(0)
+  wlk_hovers Int       @default(0)
+  wlk_clicks Int       @default(0)
+  read_time   String  @default("Unknown")
+}
+
+// Tracking data
+model Queries {
+  query String @id @unique
+  count Int @default(1)
+} 
+
+// User management
+model Users {
+  email String @id @unique
+  hash String //format: salt$hash
+  role Role
+}
+
+enum Role {
+  ADMIN
+  USER
+}

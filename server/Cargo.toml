@@ -1,0 +1,26 @@
+[workspace]
+members = [
+    "prisma_cli"
+]
+
+[package]
+name = "bidt-glossar-server"
+version = "0.1.0"
+edition = "2021"
+publish = false
+#default-run = "bidt-glossar-server"
+
+[dependencies]
+serde = { version = "1.0.147", features = ["derive"] }
+prisma-client-rust = { git = "https://github.com/Brendonovich/prisma-client-rust", rev = "310620e42805a537fcdac76082ae152266ce89ba",default-features = false,features = ["rspc", "migrations", "postgresql"]}
+rspc = { version = "0.1.2", features = ["axum"] }
+tokio = "1.20.1"
+axum = "0.5.0"
+tower-http = { version = "0.3.4", default-features = false, features = ["cors"] }
+csv = "1.1"
+strum = "0.24.1"
+strum_macros = "0.24"
+ring = "0.16.20"
+base64 = "0.20.0"
+jsonwebtoken = "8.2.0"
+chrono = "0.4.23"
