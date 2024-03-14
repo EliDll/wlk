@@ -11,7 +11,7 @@
 
 ## Frontend Setup: 
 ### 1. Install all dependencies
-Navigate to the React project (`/gruppe-2/website`)
+Navigate to the React project (`/wlk/website`)
 ```
 npm i
 ```
@@ -29,7 +29,7 @@ Set the database origin. For local db use `DATABASE_URL="postgresql://root:passw
 If you are using an `.env` file, place it in `/server/prisma/`
 
 ### 3. Generate and push database schemas
-Navigate to the Rust project (`/gruppe-2/server`)
+Navigate to the Rust project (`/wlk/server`)
 ```
 cargo prisma generate 
 cargo prisma db push 
@@ -39,7 +39,7 @@ cargo prisma db push
 Place downloaded files in `/server/data/` and rename them to `edges.csv` and `nodes.csv` respectively
 
 ### 5. Load data into postgres
-Navigate to the Rust project (`/gruppe-2/server`)
+Navigate to the Rust project (`/wlk/server`)
 ``` 
 cargo loadcsv 
 ``` 
@@ -54,13 +54,13 @@ docker start local-postgres
 ``` 
 
 ### 2. Start the API server
-Navigate to the Rust project (`/gruppe-2/server`)
+Navigate to the Rust project (`/wlk/server`)
 ``` 
 cargo server
 ```
 
 ### 3. Start the React App
-Navigate to the React project (`/gruppe-2/website`)
+Navigate to the React project (`/wlk/website`)
 
 a) in development mode with hot reload
 ``` 
